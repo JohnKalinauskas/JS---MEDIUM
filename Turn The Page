@@ -1,0 +1,36 @@
+var host = 'https://' + document.location.hostname;
+
+var pages = [
+    host + '/index.html',
+    host + '/index2.html',
+    host + '/index3.html'
+];
+
+var behind = document.getElementById('behind');
+var forward = document.getElementById('forward');
+
+function prev(current, pages) {
+    var index = pages.indexOf(current);
+    if (index === 0) {
+        return pages[pages.length - 1];
+    }
+    return pages[index - 1];
+}
+
+function next(current, pages) {
+    var index = pages.indexOf(current);
+    if (index === pages.length - 1) {
+        return pages[0];
+    }
+    return pages[index + 1];
+}
+
+behind.addEventListener('click', function () {
+    var newUrl = prev(host + window.location.pathname, pages);
+    window.location.href = newUrl;
+});
+
+forward.addEventListener('click', function () {
+    var newUrl = next(host + window.location.pathname, pages);
+    window.location.href = newUrl;
+});
